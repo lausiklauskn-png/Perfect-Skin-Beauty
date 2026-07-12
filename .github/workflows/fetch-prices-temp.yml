@@ -1,0 +1,27 @@
+name: Fetch price data (temp)
+
+on:
+  push:
+    branches: [claude/new-session-5m5p93]
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch venue pages
+        run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+          mkdir -p out
+          {
+            echo "== trea.tw redirect =="
+            curl -sL -A "$UA" -o out/venue-short.html -w "final:%{url_effective} http:%{http_code} bytes:%{size_download}\n" "https://trea.tw/BQtZqcbDWu73LDSBe" || true
+            echo "== treatwell direct =="
+            curl -sL -A "$UA" -H "Accept-Language: de-DE,de;q=0.9" -o out/venue-direct.html -w "final:%{url_effective} http:%{http_code} bytes:%{size_download}\n" "https://www.treatwell.de/ort/perfect-skin-4/" || true
+          } | tee out/meta.txt
+          ls -la out
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: price-data
+          path: out/
+          retention-days: 1
