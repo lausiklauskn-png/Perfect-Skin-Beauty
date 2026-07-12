@@ -4,27 +4,30 @@ on:
   push:
     branches: [claude/new-session-5m5p93]
 
+permissions:
+  contents: write
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - name: Download price PDFs from Google Drive
+      - uses: actions/checkout@v4
+      - name: Download price PDFs from Google Drive and commit
         run: |
-          mkdir -p out
+          # Guard: only run once (skip if PDFs already committed)
+          if [ -d pdf-src ]; then echo "pdf-src exists, skipping"; exit 0; fi
+          mkdir -p pdf-src
           dl() {
-            # $1 = name, $2 = drive file id
-            curl -sL -o "out/$1.pdf" -w "$1: http:%{http_code} bytes:%{size_download}\n" \
+            curl -sL -o "pdf-src/$1.pdf" -w "$1: http:%{http_code} bytes:%{size_download}\n" \
               "https://drive.google.com/uc?export=download&id=$2" || true
-            file "out/$1.pdf" || true
           }
           dl depilation   "1NbFmpwkI2vYWXtPbx6dlC-dM1DrG7B5l"
           dl kosmetologie "1Dm6tt2S1rUoALHJ0cTjiZiUCm5rTgTi-"
           dl homecare     "1KH-Jtb3u5N5fIP0p0dwJTzWqYVZyauw7"
           dl kurs         "14QiZqRreUs_XFDisnO-SHTRr5DudinZR"
-          ls -la out
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: price-pdfs
-          path: out/
-          retention-days: 1
+          file pdf-src/*.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pdf-src
+          git commit -m "Add fetched source price PDFs (temp)"
+          git push
