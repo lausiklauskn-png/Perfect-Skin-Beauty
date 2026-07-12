@@ -12,27 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download webfonts and commit
+      - name: Download cyrillic webfonts and commit
         run: |
-          if [ -d assets/fonts ]; then echo "fonts exist, skipping"; exit 0; fi
-          mkdir -p assets/fonts
+          if ls assets/fonts/Prata-* >/dev/null 2>&1; then echo "cyr fonts exist, skipping"; exit 0; fi
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-          css=$(curl -s -A "$UA" "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Abril+Fatface&display=swap")
+          css=$(curl -s -A "$UA" "https://fonts.googleapis.com/css2?family=Prata&family=Open+Sans:wght@400;600;700&display=swap")
           echo "$css" > /tmp/fonts.css
-          # download each unique latin/latin-ext/cyrillic woff2 with a stable name
           python3 - <<'PY'
-          import re, subprocess, os
+          import re, subprocess
           css = open('/tmp/fonts.css').read()
           blocks = re.findall(r'/\*\s*([a-z-]+)\s*\*/\s*@font-face\s*\{([^}]+)\}', css)
           seen = {}
           for subset, body in blocks:
-              if subset not in ('latin','latin-ext','cyrillic'):
+              if subset not in ('latin','latin-ext','cyrillic','cyrillic-ext'):
                   continue
               fam = re.search(r"font-family:\s*'([^']+)'", body).group(1).replace(' ','')
-              style = re.search(r"font-style:\s*(\w+)", body).group(1)
               weight = re.search(r"font-weight:\s*(\d+)", body).group(1)
               url = re.search(r"url\((\S+?)\)", body).group(1)
-              name = f"{fam}-{weight}{'-italic' if style=='italic' else ''}-{subset}.woff2"
+              name = f"{fam}-{weight}-{subset}.woff2"
               if name in seen: continue
               seen[name] = 1
               subprocess.run(['curl','-s','-o',f'assets/fonts/{name}',url], check=True)
@@ -42,5 +39,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add assets/fonts
-          git commit -m "Add self-hosted webfonts (Lato + Abril Fatface)"
+          git commit -m "Add cyrillic-capable webfonts (Prata + Open Sans)"
           git push
