@@ -232,6 +232,12 @@ a { color: inherit; }
 }
 .theme-btn__swatch i { flex: 1; }
 
+/* Hard-Reload-Knopf (Testphase): holt HTML/CSS/JS frisch vom Server */
+.reload-btn { margin-left: 10px; border-color: rgba(255, 255, 255, .22); }
+.reload-btn__icon { flex: none; }
+.reload-btn.is-busy .reload-btn__icon { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;

@@ -57,7 +57,8 @@
       ft_copy: "© {year} Alina — Kosmetikerin. Все права защищены.",
       cert_alt: "Сертификат",
       cert_open: "Открыть сертификат",
-      legal_note: "Раздел в подготовке."
+      legal_note: "Раздел в подготовке.",
+      reload: "Обновить"
     },
     de: {
       skip: "Zum Inhalt springen",
@@ -104,7 +105,8 @@
       ft_copy: "© {year} Alina — Kosmetikerin. Alle Rechte vorbehalten.",
       cert_alt: "Zertifikat",
       cert_open: "Zertifikat öffnen",
-      legal_note: "Dieser Bereich ist in Vorbereitung."
+      legal_note: "Dieser Bereich ist in Vorbereitung.",
+      reload: "Neu laden"
     },
     pl: {
       skip: "Przejdź do treści",
@@ -151,7 +153,8 @@
       ft_copy: "© {year} Alina — kosmetolog. Wszelkie prawa zastrzeżone.",
       cert_alt: "Certyfikat",
       cert_open: "Otwórz certyfikat",
-      legal_note: "Sekcja w przygotowaniu."
+      legal_note: "Sekcja w przygotowaniu.",
+      reload: "Odśwież"
     }
   };
 
@@ -356,6 +359,44 @@
       alert(labels[link.dataset.legal] + " — " + t("legal_note"));
     });
   });
+
+  /* =================================================================
+     7) Hard Reload (Testphase): Caches leeren, Kern-Dateien frisch
+        vom Server holen und Seite neu laden — ganz ohne Tastatur.
+     ================================================================= */
+  var reloadBtn = document.getElementById("hard-reload");
+  if (reloadBtn) {
+    reloadBtn.addEventListener("click", function () {
+      if (reloadBtn.classList.contains("is-busy")) return;
+      reloadBtn.classList.add("is-busy");
+
+      var done = function () { location.reload(); };
+      var safety = setTimeout(done, 4000); /* Notausstieg, falls etwas hängt */
+
+      var work = [];
+
+      /* Cache-Storage (Service Worker o. Ä.) leeren */
+      if (window.caches && caches.keys) {
+        work.push(
+          caches.keys().then(function (keys) {
+            return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+          }).catch(function () {})
+        );
+      }
+
+      /* Kern-Dateien am HTTP-Cache vorbei frisch holen */
+      if (window.fetch) {
+        [location.href, "styles.css", "script.js"].forEach(function (url) {
+          work.push(fetch(url, { cache: "reload" }).catch(function () {}));
+        });
+      }
+
+      Promise.all(work).then(function () {
+        clearTimeout(safety);
+        done();
+      });
+    });
+  }
 
   /* =================================================================
      Start: gespeicherte Auswahl anwenden
