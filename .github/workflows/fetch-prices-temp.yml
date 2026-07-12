@@ -8,20 +8,23 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch venue pages
+      - name: Download price PDFs from Google Drive
         run: |
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
           mkdir -p out
-          {
-            echo "== trea.tw redirect =="
-            curl -sL -A "$UA" -o out/venue-short.html -w "final:%{url_effective} http:%{http_code} bytes:%{size_download}\n" "https://trea.tw/BQtZqcbDWu73LDSBe" || true
-            echo "== treatwell direct =="
-            curl -sL -A "$UA" -H "Accept-Language: de-DE,de;q=0.9" -o out/venue-direct.html -w "final:%{url_effective} http:%{http_code} bytes:%{size_download}\n" "https://www.treatwell.de/ort/perfect-skin-4/" || true
-          } | tee out/meta.txt
+          dl() {
+            # $1 = name, $2 = drive file id
+            curl -sL -o "out/$1.pdf" -w "$1: http:%{http_code} bytes:%{size_download}\n" \
+              "https://drive.google.com/uc?export=download&id=$2" || true
+            file "out/$1.pdf" || true
+          }
+          dl depilation   "1NbFmpwkI2vYWXtPbx6dlC-dM1DrG7B5l"
+          dl kosmetologie "1Dm6tt2S1rUoALHJ0cTjiZiUCm5rTgTi-"
+          dl homecare     "1KH-Jtb3u5N5fIP0p0dwJTzWqYVZyauw7"
+          dl kurs         "14QiZqRreUs_XFDisnO-SHTRr5DudinZR"
           ls -la out
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: price-data
+          name: price-pdfs
           path: out/
           retention-days: 1
