@@ -10,9 +10,11 @@
   <meta property="og:description" content="Шугаринг, воск, уход за кожей лица и авторские курсы депиляции с международной сертификацией в Гамбурге.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/hero.webp">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Lato-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Lato-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/AbrilFatface-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Prata-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/OpenSans-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -143,7 +145,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv1_title">Депиляция</h3>
             <p class="service-card__text" data-i18n="sv1_text">Шугаринг и восковая депиляция для гладкой кожи надолго — комфортно, бережно и с заботой о вашей коже.</p>
-            <a class="link-arrow" href="https://trea.tw/BQtZqcbDWu73LDSBe" target="_blank" rel="noopener"><span data-i18n="sv_price">Посмотреть прайс-лист</span><span aria-hidden="true">→</span></a>
+            <a class="link-arrow" href="assets/pdf/preisliste-depilation.pdf" target="_blank" rel="noopener"><span data-i18n="sv_price">Посмотреть прайс-лист</span><span aria-hidden="true">→</span></a>
           </div>
         </article>
 
@@ -152,7 +154,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv2_title">Косметология</h3>
             <p class="service-card__text" data-i18n="sv2_text">Микронидлинг, ультразвуковая чистка, пилинги и уходовые процедуры — современные технологии для свежести и сияния кожи.</p>
-            <a class="link-arrow" href="https://trea.tw/BQtZqcbDWu73LDSBe" target="_blank" rel="noopener"><span data-i18n="sv_price">Посмотреть прайс-лист</span><span aria-hidden="true">→</span></a>
+            <a class="link-arrow" href="assets/pdf/preisliste-kosmetologie.pdf" target="_blank" rel="noopener"><span data-i18n="sv_price">Посмотреть прайс-лист</span><span aria-hidden="true">→</span></a>
           </div>
         </article>
 
@@ -161,6 +163,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv3_title">Домашний уход</h3>
             <p class="service-card__text" data-i18n="sv3_text">Индивидуальный подбор средств домашнего ухода, чтобы результат процедур сохранялся дольше.</p>
+            <a class="link-arrow" href="assets/pdf/pflege-katalog.pdf" target="_blank" rel="noopener"><span data-i18n="sv_price">Посмотреть прайс-лист</span><span aria-hidden="true">→</span></a>
             <a class="link-arrow" href="https://wa.me/491603212983" target="_blank" rel="noopener"><span data-i18n="sv3_link">Подобрать уход</span><span aria-hidden="true">→</span></a>
           </div>
         </article>
@@ -174,7 +177,7 @@
           <p class="training__text" data-i18n="tr_text">Курсы для начинающих и практикующих мастеров: отработка техник на моделях, практический сертификат и поддержка в продвижении после обучения.</p>
         </div>
         <div class="training__actions">
-          <a class="btn btn--primary btn-sheen" href="https://depilation.vercel.app/" target="_blank" rel="noopener" data-i18n="tr_program">Смотреть программу</a>
+          <a class="btn btn--primary btn-sheen" href="assets/pdf/kursprogramm.pdf" target="_blank" rel="noopener" data-i18n="tr_program">Смотреть программу</a>
           <a class="btn btn--ghost-dark btn-sheen" href="https://t.me/kontakt_AliS" target="_blank" rel="noopener" data-i18n="tr_signup">Записаться на курс</a>
         </div>
       </div>
