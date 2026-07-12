@@ -12,22 +12,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download price PDFs from Google Drive and commit
+      - name: Download webfonts and commit
         run: |
-          # Guard: only run once (skip if PDFs already committed)
-          if [ -d pdf-src ]; then echo "pdf-src exists, skipping"; exit 0; fi
-          mkdir -p pdf-src
-          dl() {
-            curl -sL -o "pdf-src/$1.pdf" -w "$1: http:%{http_code} bytes:%{size_download}\n" \
-              "https://drive.google.com/uc?export=download&id=$2" || true
-          }
-          dl depilation   "1NbFmpwkI2vYWXtPbx6dlC-dM1DrG7B5l"
-          dl kosmetologie "1Dm6tt2S1rUoALHJ0cTjiZiUCm5rTgTi-"
-          dl homecare     "1KH-Jtb3u5N5fIP0p0dwJTzWqYVZyauw7"
-          dl kurs         "14QiZqRreUs_XFDisnO-SHTRr5DudinZR"
-          file pdf-src/*.pdf
+          if [ -d assets/fonts ]; then echo "fonts exist, skipping"; exit 0; fi
+          mkdir -p assets/fonts
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+          css=$(curl -s -A "$UA" "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Abril+Fatface&display=swap")
+          echo "$css" > /tmp/fonts.css
+          # download each unique latin/latin-ext/cyrillic woff2 with a stable name
+          python3 - <<'PY'
+          import re, subprocess, os
+          css = open('/tmp/fonts.css').read()
+          blocks = re.findall(r'/\*\s*([a-z-]+)\s*\*/\s*@font-face\s*\{([^}]+)\}', css)
+          seen = {}
+          for subset, body in blocks:
+              if subset not in ('latin','latin-ext','cyrillic'):
+                  continue
+              fam = re.search(r"font-family:\s*'([^']+)'", body).group(1).replace(' ','')
+              style = re.search(r"font-style:\s*(\w+)", body).group(1)
+              weight = re.search(r"font-weight:\s*(\d+)", body).group(1)
+              url = re.search(r"url\((\S+?)\)", body).group(1)
+              name = f"{fam}-{weight}{'-italic' if style=='italic' else ''}-{subset}.woff2"
+              if name in seen: continue
+              seen[name] = 1
+              subprocess.run(['curl','-s','-o',f'assets/fonts/{name}',url], check=True)
+              print(name)
+          PY
+          ls -la assets/fonts
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pdf-src
-          git commit -m "Add fetched source price PDFs (temp)"
+          git add assets/fonts
+          git commit -m "Add self-hosted webfonts (Lato + Abril Fatface)"
           git push
