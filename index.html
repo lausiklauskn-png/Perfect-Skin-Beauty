@@ -18,6 +18,12 @@
 <body>
   <a class="skip-link" href="#services" data-i18n="skip">Перейти к содержимому</a>
 
+  <!-- Scroll-Fortschritt (feine Linie am oberen Rand) -->
+  <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
+
+  <!-- Dezentes Cursor-Licht (folgt der Maus, sanftes Leuchten) -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
   <!-- Dekorative Hintergrund-Ebene (dezent, an die Familien-Seiten angelehnt) -->
   <div class="deco" aria-hidden="true">
     <span class="deco__blob deco__blob--1"></span>
@@ -118,13 +124,38 @@
         <img src="assets/hero.webp" alt="" loading="eager" fetchpriority="high">
       </div>
       <div class="hero__content">
-        <p class="hero__eyebrow">Perfect Skin Beauty · Hamburg</p>
-        <h1 class="hero__title" data-i18n="hero_title">Деликатная депиляция и эстетическая косметология</h1>
-        <p class="hero__tagline" data-i18n="hero_tagline">Обучение для будущих мастеров</p>
-        <p class="hero__lead" data-i18n="hero_lead">Профессиональные процедуры по шугарингу, воску и уходу за кожей лица, а также авторские курсы депиляции с международной сертификацией и поддержкой в продвижении.</p>
-        <div class="hero__actions">
+        <p class="hero__eyebrow" data-hero="1">Perfect Skin Beauty · Hamburg</p>
+        <h1 class="hero__title" data-hero="2" data-i18n="hero_title">Деликатная депиляция и эстетическая косметология</h1>
+        <p class="hero__tagline" data-hero="3" data-i18n="hero_tagline">Обучение для будущих мастеров</p>
+        <p class="hero__lead" data-hero="4" data-i18n="hero_lead">Профессиональные процедуры по шугарингу, воску и уходу за кожей лица, а также авторские курсы депиляции с международной сертификацией и поддержкой в продвижении.</p>
+        <div class="hero__actions" data-hero="5">
           <a class="btn btn--primary btn-sheen" href="https://trea.tw/BQtZqcbDWu73LDSBe" target="_blank" rel="noopener" data-i18n="cta_book">Записаться на процедуру</a>
           <a class="btn btn--ghost btn-sheen" href="https://depilation.vercel.app/" target="_blank" rel="noopener" data-i18n="cta_course">Узнать о курсе</a>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#stats" aria-label="Scroll" data-hero="6">
+        <span class="hero__scroll-dot"></span>
+      </a>
+    </section>
+
+    <!-- ============ STATS / ZAHLEN ============ -->
+    <section class="stats" id="stats" aria-label="Zahlen">
+      <div class="stats__grid">
+        <div class="stat" data-reveal>
+          <span class="stat__num" data-count="7" data-suffix="+">0</span>
+          <span class="stat__label" data-i18n="st_years">лет опыта</span>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="1">
+          <span class="stat__num" data-count="1500" data-suffix="+">0</span>
+          <span class="stat__label" data-i18n="st_clients">довольных клиентов</span>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="2">
+          <span class="stat__num" data-count="12" data-suffix="">0</span>
+          <span class="stat__label" data-i18n="st_certs">сертификатов</span>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="3">
+          <span class="stat__num" data-count="100" data-suffix="%">0</span>
+          <span class="stat__label" data-i18n="st_care">индивидуальный подход</span>
         </div>
       </div>
     </section>
@@ -138,7 +169,7 @@
       </div>
 
       <div class="services__grid">
-        <article class="service-card">
+        <article class="service-card" data-reveal data-tilt>
           <div class="service-card__media"><img src="assets/service-depilation.webp" alt="" loading="lazy"></div>
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv1_title">Депиляция</h3>
@@ -147,7 +178,7 @@
           </div>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-reveal data-reveal-delay="1" data-tilt>
           <div class="service-card__media"><img src="assets/service-cosmetology.webp" alt="" loading="lazy"></div>
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv2_title">Косметология</h3>
@@ -156,7 +187,7 @@
           </div>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-reveal data-reveal-delay="2" data-tilt>
           <div class="service-card__media"><img src="assets/service-homecare.webp" alt="" loading="lazy"></div>
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv3_title">Домашний уход</h3>
@@ -167,7 +198,7 @@
       </div>
 
       <!-- Training highlight -->
-      <div class="training" id="training">
+      <div class="training" id="training" data-reveal>
         <div class="training__content">
           <p class="training__eyebrow" data-i18n="tr_eyebrow">Обучение по депиляции</p>
           <h3 class="training__title" data-i18n="tr_title">Авторские курсы с международным сертификатом</h3>
@@ -180,12 +211,47 @@
       </div>
     </section>
 
+    <!-- ============ ABLAUF / ПРОЦЕСС ============ -->
+    <section class="process" id="process">
+      <div class="section-head" data-reveal>
+        <p class="section-head__eyebrow" data-i18n="pr_eyebrow">Как это проходит</p>
+        <h2 class="section-head__title" data-i18n="pr_title">Ваш визит — шаг за шагом</h2>
+        <p class="section-head__lead" data-i18n="pr_lead">Спокойно, бережно и прозрачно — от первой консультации до рекомендаций по уходу.</p>
+      </div>
+      <ol class="process__steps">
+        <li class="process-step" data-reveal>
+          <span class="process-step__num">01</span>
+          <h3 class="process-step__title" data-i18n="pr1_title">Консультация</h3>
+          <p class="process-step__text" data-i18n="pr1_text">Обсуждаем ваши пожелания, тип кожи и подбираем подходящую процедуру.</p>
+        </li>
+        <li class="process-step" data-reveal data-reveal-delay="1">
+          <span class="process-step__num">02</span>
+          <h3 class="process-step__title" data-i18n="pr2_title">Подготовка</h3>
+          <p class="process-step__text" data-i18n="pr2_text">Мягкое очищение и подготовка кожи к процедуре — комфортно и безопасно.</p>
+        </li>
+        <li class="process-step" data-reveal data-reveal-delay="2">
+          <span class="process-step__num">03</span>
+          <h3 class="process-step__title" data-i18n="pr3_title">Процедура</h3>
+          <p class="process-step__text" data-i18n="pr3_text">Аккуратная работа профессиональными техниками и качественными материалами.</p>
+        </li>
+        <li class="process-step" data-reveal data-reveal-delay="3">
+          <span class="process-step__num">04</span>
+          <h3 class="process-step__title" data-i18n="pr4_title">Уход после</h3>
+          <p class="process-step__text" data-i18n="pr4_text">Индивидуальные рекомендации, чтобы результат радовал как можно дольше.</p>
+        </li>
+      </ol>
+    </section>
+
     <!-- ============ ABOUT ============ -->
     <section class="about" id="aboutMe">
-      <div class="about__media">
+      <div class="about__media" data-reveal data-parallax="0.12">
         <img src="assets/about.webp" alt="Alina — Perfect Skin Beauty" loading="lazy">
+        <span class="about__badge" data-reveal data-reveal-delay="2">
+          <b data-count="7" data-suffix="+">0</b>
+          <i data-i18n="ab_badge">лет опыта</i>
+        </span>
       </div>
-      <div class="about__content">
+      <div class="about__content" data-reveal data-reveal-delay="1">
         <p class="section-head__eyebrow" data-i18n="ab_eyebrow">Обо мне</p>
         <h2 class="about__title" data-i18n="ab_title">С любовью к делу и вниманием к каждому</h2>
         <div class="about__text">
@@ -202,18 +268,86 @@
 
     <!-- ============ CERTIFICATES ============ -->
     <section class="certificates" id="certificates">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <p class="section-head__eyebrow" data-i18n="ct_eyebrow">Квалификация</p>
         <h2 class="section-head__title" data-i18n="ct_title">Мои сертификаты и дипломы</h2>
         <p class="section-head__lead" data-i18n="ct_lead">Подтверждённая квалификация — ваша уверенность в качестве и безопасности процедур.</p>
       </div>
 
-      <div class="carousel">
+      <div class="carousel" data-reveal>
         <button class="carousel__btn carousel__btn--prev" aria-label="◀">‹</button>
         <div class="carousel__track" id="cert-track">
           <!-- certificates injected by script.js -->
         </div>
         <button class="carousel__btn carousel__btn--next" aria-label="▶">›</button>
+      </div>
+    </section>
+
+    <!-- ============ STIMMEN / ОТЗЫВЫ ============ -->
+    <section class="testimonials" id="testimonials">
+      <div class="section-head" data-reveal>
+        <p class="section-head__eyebrow" data-i18n="te_eyebrow">Отзывы</p>
+        <h2 class="section-head__title" data-i18n="te_title">Что говорят клиенты</h2>
+        <p class="section-head__lead" data-i18n="te_lead">Доверие, которое строится на бережном отношении и стабильном результате.</p>
+      </div>
+      <div class="testimonials__grid">
+        <figure class="quote" data-reveal>
+          <div class="quote__stars" aria-hidden="true">★★★★★</div>
+          <blockquote class="quote__text" data-i18n="te1_text">«Впервые депиляция прошла настолько комфортно. Кожа гладкая уже больше трёх недель, а атмосфера — по-настоящему уютная.»</blockquote>
+          <figcaption class="quote__author"><span class="quote__avatar">М</span><span data-i18n="te1_name">Мария К.</span></figcaption>
+        </figure>
+        <figure class="quote" data-reveal data-reveal-delay="1">
+          <div class="quote__stars" aria-hidden="true">★★★★★</div>
+          <blockquote class="quote__text" data-i18n="te2_text">«Прошла курс по депиляции — всё чётко, с практикой и поддержкой после обучения. Уже принимаю первых клиентов!»</blockquote>
+          <figcaption class="quote__author"><span class="quote__avatar">А</span><span data-i18n="te2_name">Анна В.</span></figcaption>
+        </figure>
+        <figure class="quote" data-reveal data-reveal-delay="2">
+          <div class="quote__stars" aria-hidden="true">★★★★★</div>
+          <blockquote class="quote__text" data-i18n="te3_text">«Чистка лица и уход — результат виден сразу. Алина внимательна к деталям и подбирает уход именно под мою кожу.»</blockquote>
+          <figcaption class="quote__author"><span class="quote__avatar">Е</span><span data-i18n="te3_name">Елена Т.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq">
+      <div class="section-head" data-reveal>
+        <p class="section-head__eyebrow" data-i18n="fa_eyebrow">Вопросы и ответы</p>
+        <h2 class="section-head__title" data-i18n="fa_title">Частые вопросы</h2>
+      </div>
+      <div class="faq__list" data-reveal>
+        <details class="faq-item">
+          <summary class="faq-item__q" data-i18n="fa1_q">Больно ли делать шугаринг?</summary>
+          <div class="faq-item__a"><p data-i18n="fa1_a">Ощущения индивидуальны, но техника шугаринга бережная. Я работаю аккуратно и подскажу, как подготовиться, чтобы процедура прошла максимально комфортно.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-item__q" data-i18n="fa2_q">Как подготовиться к процедуре?</summary>
+          <div class="faq-item__a"><p data-i18n="fa2_a">Длина волосков — от 3–5 мм, за сутки лучше избегать загара и агрессивных пилингов. Остальное подскажу при записи с учётом вашей кожи.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-item__q" data-i18n="fa3_q">Нужен ли опыт для курса депиляции?</summary>
+          <div class="faq-item__a"><p data-i18n="fa3_a">Нет. Есть программы и для начинающих с нуля, и для практикующих мастеров. Отрабатываем техники на моделях и выдаём международный сертификат.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-item__q" data-i18n="fa4_q">Как записаться?</summary>
+          <div class="faq-item__a"><p data-i18n="fa4_a">Через кнопку онлайн-записи, WhatsApp, Telegram или по телефону. Приём по предварительной записи — подберём удобное для вас время.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ GESCHENKGUTSCHEIN ============ -->
+    <section class="voucher" id="voucher">
+      <div class="voucher__card" data-reveal>
+        <div class="voucher__shine" aria-hidden="true"></div>
+        <div class="voucher__content">
+          <p class="voucher__eyebrow" data-i18n="gc_eyebrow">Подарок с заботой</p>
+          <h2 class="voucher__title" data-i18n="gc_title">Подарочный сертификат</h2>
+          <p class="voucher__text" data-i18n="gc_text">Подарите близким ощущение ухоженности и заботы о себе. Сертификат на любую процедуру — на выбранную сумму или услугу.</p>
+          <a class="btn btn--primary btn-sheen" href="https://wa.me/491603212983" target="_blank" rel="noopener" data-i18n="gc_cta">Заказать сертификат</a>
+        </div>
+        <div class="voucher__seal" aria-hidden="true">
+          <span class="logo__mark">PSB</span>
+        </div>
       </div>
     </section>
 
@@ -290,6 +424,14 @@
       </nav>
     </div>
   </footer>
+
+  <!-- Deutlich sichtbarer Hard-Reload (Testphase, ideal fürs Handy) -->
+  <button class="fab-reload" type="button" id="fab-reload" title="Hard Reload">
+    <span class="fab-reload__ring" aria-hidden="true"></span>
+    <svg class="fab-reload__icon" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35Z"/></svg>
+    <span class="fab-reload__label" data-i18n="reload_fresh">Frische Version</span>
+    <span class="fab-reload__badge">TEST</span>
+  </button>
 
   <!-- Lightbox for certificates -->
   <div class="lightbox" id="lightbox" hidden>

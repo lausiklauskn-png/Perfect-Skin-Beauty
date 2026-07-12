@@ -58,7 +58,47 @@
       cert_alt: "Сертификат",
       cert_open: "Открыть сертификат",
       legal_note: "Раздел в подготовке.",
-      reload: "Обновить"
+      reload: "Обновить",
+      reload_fresh: "Свежая версия",
+      st_years: "лет опыта",
+      st_clients: "довольных клиентов",
+      st_certs: "сертификатов",
+      st_care: "индивидуальный подход",
+      pr_eyebrow: "Как это проходит",
+      pr_title: "Ваш визит — шаг за шагом",
+      pr_lead: "Спокойно, бережно и прозрачно — от первой консультации до рекомендаций по уходу.",
+      pr1_title: "Консультация",
+      pr1_text: "Обсуждаем ваши пожелания, тип кожи и подбираем подходящую процедуру.",
+      pr2_title: "Подготовка",
+      pr2_text: "Мягкое очищение и подготовка кожи к процедуре — комфортно и безопасно.",
+      pr3_title: "Процедура",
+      pr3_text: "Аккуратная работа профессиональными техниками и качественными материалами.",
+      pr4_title: "Уход после",
+      pr4_text: "Индивидуальные рекомендации, чтобы результат радовал как можно дольше.",
+      ab_badge: "лет опыта",
+      te_eyebrow: "Отзывы",
+      te_title: "Что говорят клиенты",
+      te_lead: "Доверие, которое строится на бережном отношении и стабильном результате.",
+      te1_text: "«Впервые депиляция прошла настолько комфортно. Кожа гладкая уже больше трёх недель, а атмосфера — по-настоящему уютная.»",
+      te1_name: "Мария К.",
+      te2_text: "«Прошла курс по депиляции — всё чётко, с практикой и поддержкой после обучения. Уже принимаю первых клиентов!»",
+      te2_name: "Анна В.",
+      te3_text: "«Чистка лица и уход — результат виден сразу. Алина внимательна к деталям и подбирает уход именно под мою кожу.»",
+      te3_name: "Елена Т.",
+      fa_eyebrow: "Вопросы и ответы",
+      fa_title: "Частые вопросы",
+      fa1_q: "Больно ли делать шугаринг?",
+      fa1_a: "Ощущения индивидуальны, но техника шугаринга бережная. Я работаю аккуратно и подскажу, как подготовиться, чтобы процедура прошла максимально комфортно.",
+      fa2_q: "Как подготовиться к процедуре?",
+      fa2_a: "Длина волосков — от 3–5 мм, за сутки лучше избегать загара и агрессивных пилингов. Остальное подскажу при записи с учётом вашей кожи.",
+      fa3_q: "Нужен ли опыт для курса депиляции?",
+      fa3_a: "Нет. Есть программы и для начинающих с нуля, и для практикующих мастеров. Отрабатываем техники на моделях и выдаём международный сертификат.",
+      fa4_q: "Как записаться?",
+      fa4_a: "Через кнопку онлайн-записи, WhatsApp, Telegram или по телефону. Приём по предварительной записи — подберём удобное для вас время.",
+      gc_eyebrow: "Подарок с заботой",
+      gc_title: "Подарочный сертификат",
+      gc_text: "Подарите близким ощущение ухоженности и заботы о себе. Сертификат на любую процедуру — на выбранную сумму или услугу.",
+      gc_cta: "Заказать сертификат"
     },
     de: {
       skip: "Zum Inhalt springen",
@@ -106,7 +146,47 @@
       cert_alt: "Zertifikat",
       cert_open: "Zertifikat öffnen",
       legal_note: "Dieser Bereich ist in Vorbereitung.",
-      reload: "Neu laden"
+      reload: "Neu laden",
+      reload_fresh: "Frische Version",
+      st_years: "Jahre Erfahrung",
+      st_clients: "zufriedene Kundinnen",
+      st_certs: "Zertifikate",
+      st_care: "individuelle Betreuung",
+      pr_eyebrow: "So läuft es ab",
+      pr_title: "Ihr Termin — Schritt für Schritt",
+      pr_lead: "Ruhig, sanft und transparent — von der ersten Beratung bis zur Pflegeempfehlung.",
+      pr1_title: "Beratung",
+      pr1_text: "Wir besprechen Ihre Wünsche, Ihren Hauttyp und wählen die passende Behandlung.",
+      pr2_title: "Vorbereitung",
+      pr2_text: "Sanfte Reinigung und Vorbereitung der Haut auf die Behandlung — angenehm und sicher.",
+      pr3_title: "Behandlung",
+      pr3_text: "Sorgfältige Arbeit mit professionellen Techniken und hochwertigen Materialien.",
+      pr4_title: "Pflege danach",
+      pr4_text: "Individuelle Empfehlungen, damit das Ergebnis möglichst lange schön bleibt.",
+      ab_badge: "Jahre Erfahrung",
+      te_eyebrow: "Stimmen",
+      te_title: "Was Kundinnen sagen",
+      te_lead: "Vertrauen, das auf sanfter Behandlung und beständigem Ergebnis wächst.",
+      te1_text: "„Zum ersten Mal war Haarentfernung so angenehm. Die Haut ist seit über drei Wochen glatt und die Atmosphäre wunderbar entspannt.“",
+      te1_name: "Maria K.",
+      te2_text: "„Ich habe den Depilationskurs gemacht — alles klar strukturiert, mit Praxis und Unterstützung danach. Ich betreue schon meine ersten Kundinnen!“",
+      te2_name: "Anna W.",
+      te3_text: "„Gesichtsreinigung und Pflege — das Ergebnis war sofort sichtbar. Alina achtet auf jedes Detail und wählt die Pflege genau für meine Haut.“",
+      te3_name: "Elena T.",
+      fa_eyebrow: "Fragen & Antworten",
+      fa_title: "Häufige Fragen",
+      fa1_q: "Ist Sugaring schmerzhaft?",
+      fa1_a: "Das Empfinden ist individuell, doch die Sugaring-Technik ist sanft. Ich arbeite behutsam und erkläre Ihnen, wie Sie sich vorbereiten, damit es so angenehm wie möglich wird.",
+      fa2_q: "Wie bereite ich mich auf die Behandlung vor?",
+      fa2_a: "Haarlänge ab 3–5 mm, am Vortag besser kein Sonnenbad und keine aggressiven Peelings. Alles Weitere bespreche ich mit Ihnen passend zu Ihrer Haut.",
+      fa3_q: "Brauche ich Erfahrung für den Depilationskurs?",
+      fa3_a: "Nein. Es gibt Programme für Anfängerinnen ganz ohne Vorkenntnisse und für praktizierende Meisterinnen. Wir üben an Modellen und stellen ein internationales Zertifikat aus.",
+      fa4_q: "Wie buche ich einen Termin?",
+      fa4_a: "Über den Online-Buchungsbutton, WhatsApp, Telegram oder telefonisch. Termine nach Vereinbarung — wir finden eine passende Zeit für Sie.",
+      gc_eyebrow: "Ein Geschenk mit Herz",
+      gc_title: "Geschenkgutschein",
+      gc_text: "Schenken Sie Ihren Liebsten das Gefühl von Gepflegtheit und Selbstfürsorge. Ein Gutschein für jede Behandlung — über einen Wunschbetrag oder eine Leistung.",
+      gc_cta: "Gutschein anfragen"
     },
     pl: {
       skip: "Przejdź do treści",
@@ -154,7 +234,47 @@
       cert_alt: "Certyfikat",
       cert_open: "Otwórz certyfikat",
       legal_note: "Sekcja w przygotowaniu.",
-      reload: "Odśwież"
+      reload: "Odśwież",
+      reload_fresh: "Świeża wersja",
+      st_years: "lat doświadczenia",
+      st_clients: "zadowolonych klientek",
+      st_certs: "certyfikatów",
+      st_care: "indywidualne podejście",
+      pr_eyebrow: "Jak to przebiega",
+      pr_title: "Twoja wizyta — krok po kroku",
+      pr_lead: "Spokojnie, delikatnie i przejrzyście — od pierwszej konsultacji po zalecenia pielęgnacyjne.",
+      pr1_title: "Konsultacja",
+      pr1_text: "Omawiamy Twoje oczekiwania, typ skóry i dobieramy odpowiedni zabieg.",
+      pr2_title: "Przygotowanie",
+      pr2_text: "Delikatne oczyszczenie i przygotowanie skóry do zabiegu — komfortowo i bezpiecznie.",
+      pr3_title: "Zabieg",
+      pr3_text: "Staranna praca profesjonalnymi technikami i wysokiej jakości materiałami.",
+      pr4_title: "Pielęgnacja po",
+      pr4_text: "Indywidualne zalecenia, aby efekt cieszył jak najdłużej.",
+      ab_badge: "lat doświadczenia",
+      te_eyebrow: "Opinie",
+      te_title: "Co mówią klientki",
+      te_lead: "Zaufanie, które rośnie na delikatnym podejściu i trwałym efekcie.",
+      te1_text: "„Po raz pierwszy depilacja była tak komfortowa. Skóra jest gładka od ponad trzech tygodni, a atmosfera naprawdę przytulna.“",
+      te1_name: "Maria K.",
+      te2_text: "„Ukończyłam kurs depilacji — wszystko konkretnie, z praktyką i wsparciem po szkoleniu. Przyjmuję już pierwsze klientki!“",
+      te2_name: "Anna W.",
+      te3_text: "„Oczyszczanie twarzy i pielęgnacja — efekt widoczny od razu. Alina dba o każdy detal i dobiera pielęgnację pod moją skórę.“",
+      te3_name: "Elena T.",
+      fa_eyebrow: "Pytania i odpowiedzi",
+      fa_title: "Częste pytania",
+      fa1_q: "Czy sugaring boli?",
+      fa1_a: "Odczucia są indywidualne, ale technika sugaringu jest delikatna. Pracuję ostrożnie i podpowiem, jak się przygotować, aby zabieg był jak najbardziej komfortowy.",
+      fa2_q: "Jak przygotować się do zabiegu?",
+      fa2_a: "Długość włosków od 3–5 mm, dzień wcześniej lepiej unikać opalania i mocnych peelingów. Resztę omówię z Tobą, uwzględniając Twoją skórę.",
+      fa3_q: "Czy potrzebuję doświadczenia na kurs depilacji?",
+      fa3_a: "Nie. Są programy dla początkujących zupełnie od zera i dla praktykujących stylistek. Ćwiczymy na modelkach i wydajemy międzynarodowy certyfikat.",
+      fa4_q: "Jak umówić wizytę?",
+      fa4_a: "Przez przycisk rezerwacji online, WhatsApp, Telegram lub telefonicznie. Przyjmuję po umówieniu — znajdziemy dogodny dla Ciebie termin.",
+      gc_eyebrow: "Prezent z troską",
+      gc_title: "Bon podarunkowy",
+      gc_text: "Podaruj bliskim poczucie zadbania i troski o siebie. Bon na dowolny zabieg — na wybraną kwotę lub usługę.",
+      gc_cta: "Zamów bon"
     }
   };
 
@@ -364,37 +484,177 @@
      7) Hard Reload (Testphase): Caches leeren, Kern-Dateien frisch
         vom Server holen und Seite neu laden — ganz ohne Tastatur.
      ================================================================= */
-  var reloadBtn = document.getElementById("hard-reload");
-  if (reloadBtn) {
-    reloadBtn.addEventListener("click", function () {
-      if (reloadBtn.classList.contains("is-busy")) return;
-      reloadBtn.classList.add("is-busy");
+  function hardReload(btn) {
+    if (btn.classList.contains("is-busy")) return;
+    btn.classList.add("is-busy");
 
-      var done = function () { location.reload(); };
-      var safety = setTimeout(done, 4000); /* Notausstieg, falls etwas hängt */
+    var done = function () {
+      /* Cache-Buster im URL erzwingt bei GitHub Pages/Handy eine frische Seite */
+      var u = location.href.split("#")[0].split("?")[0];
+      location.replace(u + "?fresh=" + Date.now());
+    };
+    var safety = setTimeout(done, 4000); /* Notausstieg, falls etwas hängt */
 
-      var work = [];
+    var work = [];
 
-      /* Cache-Storage (Service Worker o. Ä.) leeren */
-      if (window.caches && caches.keys) {
-        work.push(
-          caches.keys().then(function (keys) {
-            return Promise.all(keys.map(function (k) { return caches.delete(k); }));
-          }).catch(function () {})
-        );
-      }
+    /* Cache-Storage (Service Worker o. Ä.) leeren */
+    if (window.caches && caches.keys) {
+      work.push(
+        caches.keys().then(function (keys) {
+          return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+        }).catch(function () {})
+      );
+    }
 
-      /* Kern-Dateien am HTTP-Cache vorbei frisch holen */
-      if (window.fetch) {
-        [location.href, "styles.css", "script.js"].forEach(function (url) {
-          work.push(fetch(url, { cache: "reload" }).catch(function () {}));
+    /* Kern-Dateien am HTTP-Cache vorbei frisch holen */
+    if (window.fetch) {
+      [location.href, "styles.css", "script.js"].forEach(function (url) {
+        work.push(fetch(url, { cache: "reload" }).catch(function () {}));
+      });
+    }
+
+    Promise.all(work).then(function () {
+      clearTimeout(safety);
+      done();
+    });
+  }
+
+  ["hard-reload", "fab-reload"].forEach(function (id) {
+    var btn = document.getElementById(id);
+    if (btn) btn.addEventListener("click", function () { hardReload(btn); });
+  });
+
+  /* =================================================================
+     8) Effekt-Layer: Scroll-Reveal, Count-up, Parallax, Cursor-Licht,
+        Karten-Tilt, Scroll-Fortschritt — iOS-artig, dezent, respektiert
+        prefers-reduced-motion.
+     ================================================================= */
+
+  /* --- Count-up-Animation für Zahlen --- */
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute("data-count")) || 0;
+    var suffix = el.getAttribute("data-suffix") || "";
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    var dur = 1500, start = null;
+    function tick(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* --- Scroll-Reveal (+ Count-up beim Erscheinen) --- */
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    document.querySelectorAll("[data-reveal]").forEach(function (el) { el.classList.add("is-visible"); });
+    document.querySelectorAll("[data-count]").forEach(function (c) {
+      c.textContent = (c.getAttribute("data-count") || "") + (c.getAttribute("data-suffix") || "");
+    });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.classList.add("is-visible");
+        el.querySelectorAll("[data-count]").forEach(function (c) {
+          if (!c.dataset.counted) { c.dataset.counted = "1"; animateCount(c); }
+        });
+        revealObserver.unobserve(el);
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+
+    document.querySelectorAll("[data-reveal]").forEach(function (el) {
+      var d = el.getAttribute("data-reveal-delay");
+      if (d) el.style.setProperty("--reveal-delay", d);
+      revealObserver.observe(el);
+    });
+  }
+
+  /* --- Scroll-Fortschritt (feine Linie oben) --- */
+  var progressBar = document.querySelector(".scroll-progress__bar");
+
+  /* --- Parallax für Bilder (sanfte Tiefe beim Scrollen) --- */
+  var parallaxEls = [].slice.call(document.querySelectorAll("[data-parallax]"));
+  if (reduceMotion) parallaxEls = [];
+
+  function onScroll() {
+    var doc = document.documentElement;
+    if (progressBar) {
+      var max = doc.scrollHeight - doc.clientHeight;
+      progressBar.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + "%";
+    }
+    if (parallaxEls.length) {
+      var vh = window.innerHeight;
+      parallaxEls.forEach(function (el) {
+        var img = el.querySelector("img");
+        if (!img) return;
+        var r = el.getBoundingClientRect();
+        if (r.bottom < -80 || r.top > vh + 80) return;
+        var factor = parseFloat(el.getAttribute("data-parallax")) || 0.1;
+        var offset = ((r.top + r.height / 2) - vh / 2) * factor;
+        img.style.transform = "translateY(" + (-offset).toFixed(1) + "px) scale(1.14)";
+      });
+    }
+  }
+
+  var ticking = false;
+  function requestScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { onScroll(); ticking = false; });
+  }
+  window.addEventListener("scroll", requestScroll, { passive: true });
+  window.addEventListener("resize", requestScroll, { passive: true });
+  onScroll();
+
+  /* --- Dezentes Cursor-Licht + sanfter Karten-Tilt (nur feine Zeiger) --- */
+  var finePointer = window.matchMedia && matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (finePointer && !reduceMotion) {
+    var glow = document.querySelector(".cursor-glow");
+    var gx = 0, gy = 0, glowRaf = false;
+    document.addEventListener("pointermove", function (e) {
+      gx = e.clientX; gy = e.clientY;
+      if (glow && !glowRaf) {
+        glowRaf = true;
+        requestAnimationFrame(function () {
+          glow.style.setProperty("--cx", gx + "px");
+          glow.style.setProperty("--cy", gy + "px");
+          glow.classList.add("is-on");
+          glowRaf = false;
         });
       }
 
-      Promise.all(work).then(function () {
-        clearTimeout(safety);
-        done();
-      });
+      /* Karten-Tilt */
+      var card = e.target && e.target.closest && e.target.closest("[data-tilt]");
+      if (card) {
+        var cr = card.getBoundingClientRect();
+        var px = (e.clientX - cr.left) / cr.width - 0.5;
+        var py = (e.clientY - cr.top) / cr.height - 0.5;
+        card.style.setProperty("--ty", (px * 5).toFixed(2) + "deg");
+        card.style.setProperty("--tx", (-py * 5).toFixed(2) + "deg");
+      }
+    }, { passive: true });
+
+    document.addEventListener("pointerover", function (e) {
+      var leaving = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest("[data-tilt]") : null;
+      var entering = e.target && e.target.closest ? e.target.closest("[data-tilt]") : null;
+      if (leaving && leaving !== entering) {
+        leaving.style.removeProperty("--tx");
+        leaving.style.removeProperty("--ty");
+      }
+    }, { passive: true });
+
+    document.addEventListener("pointerleave", function () {
+      if (glow) glow.classList.remove("is-on");
+    }, { passive: true });
+
+    document.querySelectorAll("[data-tilt]").forEach(function (card) {
+      card.addEventListener("pointerleave", function () {
+        card.style.removeProperty("--tx");
+        card.style.removeProperty("--ty");
+      }, { passive: true });
     });
   }
 
