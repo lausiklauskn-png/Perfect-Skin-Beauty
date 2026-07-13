@@ -369,6 +369,11 @@ a { color: inherit; }
   letter-spacing: .04em;
   flex: none;
 }
+/* Logo als Bild (statt PSB-Text) + Hover-Vergrößerung */
+img.logo__mark { object-fit: cover; background: #f2ece4; cursor: pointer;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s; transform-origin: left center; }
+img.logo__mark:hover { transform: scale(1.9); z-index: 40; position: relative;
+  box-shadow: 0 16px 40px -12px rgba(29,23,21,.5); }
 .logo__text { display: flex; flex-direction: column; line-height: 1.15; }
 .logo__title { font-weight: 700; font-size: 18px; letter-spacing: .01em; }
 .logo__sub { font-size: 12px; color: var(--body); letter-spacing: .12em; text-transform: uppercase; }
