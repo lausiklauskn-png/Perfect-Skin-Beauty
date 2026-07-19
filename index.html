@@ -77,6 +77,9 @@
           <svg class="reload-btn__icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35Z"/></svg>
           <span data-i18n="reload">Обновить</span>
         </button>
+        <button class="topbar__btn" type="button" id="bild-toggle" data-bild-open title="Bilder tauschen / Заменить фото">
+          🖼 <span data-i18n="bild_btn">Фото</span>
+        </button>
       </div>
     </div>
   </div>
@@ -125,7 +128,7 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="hero__media">
-        <img src="assets/hero.webp" alt="" loading="eager" fetchpriority="high">
+        <img src="assets/hero.webp" data-bild alt="" loading="eager" fetchpriority="high">
       </div>
       <div class="hero__content">
         <p class="hero__eyebrow" data-hero="1">Perfect Skin Beauty · Hamburg</p>
@@ -174,7 +177,7 @@
 
       <div class="services__grid">
         <article class="service-card" data-reveal data-tilt>
-          <div class="service-card__media"><img src="assets/service-depilation.webp" alt="" loading="lazy"></div>
+          <div class="service-card__media"><img src="assets/service-depilation.webp" data-bild alt="" loading="lazy"></div>
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv1_title">Депиляция</h3>
             <p class="service-card__text" data-i18n="sv1_text">Шугаринг и восковая депиляция для гладкой кожи надолго — комфортно, бережно и с заботой о вашей коже.</p>
@@ -183,7 +186,7 @@
         </article>
 
         <article class="service-card" data-reveal data-reveal-delay="1" data-tilt>
-          <div class="service-card__media"><img src="assets/service-cosmetology.webp" alt="" loading="lazy"></div>
+          <div class="service-card__media"><img src="assets/service-cosmetology.webp" data-bild alt="" loading="lazy"></div>
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv2_title">Косметология</h3>
             <p class="service-card__text" data-i18n="sv2_text">Микронидлинг, ультразвуковая чистка, пилинги и уходовые процедуры — современные технологии для свежести и сияния кожи.</p>
@@ -192,7 +195,7 @@
         </article>
 
         <article class="service-card" data-reveal data-reveal-delay="2" data-tilt>
-          <div class="service-card__media"><img src="assets/service-homecare.webp" alt="" loading="lazy"></div>
+          <div class="service-card__media"><img src="assets/service-homecare.webp" data-bild alt="" loading="lazy"></div>
           <div class="service-card__body">
             <h3 class="service-card__title" data-i18n="sv3_title">Домашний уход</h3>
             <p class="service-card__text" data-i18n="sv3_text">Индивидуальный подбор средств домашнего ухода, чтобы результат процедур сохранялся дольше.</p>
@@ -250,7 +253,7 @@
     <!-- ============ ABOUT ============ -->
     <section class="about" id="aboutMe">
       <div class="about__media" data-reveal data-parallax="0.12">
-        <img src="assets/about.webp" alt="Alina — Perfect Skin Beauty" loading="lazy">
+        <img src="assets/about.webp" data-bild alt="Alina — Perfect Skin Beauty" loading="lazy">
         <span class="about__badge" data-reveal data-reveal-delay="2">
           <b data-count="7" data-suffix="+">0</b>
           <i data-i18n="ab_badge">лет опыта</i>
@@ -447,5 +450,6 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="bild-import.js" defer></script>
 </body>
 </html>

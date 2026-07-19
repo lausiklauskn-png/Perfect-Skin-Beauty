@@ -59,6 +59,7 @@
       cert_open: "Открыть сертификат",
       legal_note: "Раздел в подготовке.",
       reload: "Обновить",
+      bild_btn: "Фото",
       reload_fresh: "Свежая версия",
       st_years: "лет опыта",
       st_clients: "довольных клиентов",
@@ -147,6 +148,7 @@
       cert_open: "Zertifikat öffnen",
       legal_note: "Dieser Bereich ist in Vorbereitung.",
       reload: "Neu laden",
+      bild_btn: "Bilder",
       reload_fresh: "Frische Version",
       st_years: "Jahre Erfahrung",
       st_clients: "zufriedene Kundinnen",
@@ -235,6 +237,7 @@
       cert_open: "Otwórz certyfikat",
       legal_note: "Sekcja w przygotowaniu.",
       reload: "Odśwież",
+      bild_btn: "Zdjęcia",
       reload_fresh: "Świeża wersja",
       st_years: "lat doświadczenia",
       st_clients: "zadowolonych klientek",
@@ -409,6 +412,7 @@
       var img = document.createElement("img");
       img.src = src;
       img.loading = "lazy";
+      img.setAttribute("data-bild", "");
       certBtn.appendChild(img);
       track.appendChild(certBtn);
     }
