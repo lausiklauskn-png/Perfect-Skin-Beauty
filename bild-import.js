@@ -44,7 +44,7 @@
     de: {
       title: "Bilder verwalten", intro: "Klicke ein Bild auf der Seite an, um es zu tauschen. Die Vorschau erscheint sofort. Zum Veröffentlichen unten „Ins Repo speichern“.",
       pick: "Bild ändern", change: "Bild wählen", reset: "Zurücksetzen", resetAll: "Alle Vorschauen verwerfen",
-      pending: "geänderte Bilder", none: "Noch keine Bilder geändert.",
+      pending: "geänderte Elemente", none: "Noch nichts geändert.",
       save: "Ins Repo speichern", saving: "Speichere …", saved: "Gespeichert. Die Seite wird in ~1 Minute aktualisiert.",
       tokenLabel: "GitHub-Zugangs-Schlüssel (Token)", tokenHint: "Bleibt nur in diesem Browser. Nötig zum Speichern ins Repo. Feingranularer Token mit „Contents: Read and write“ auf dieses Repo.",
       tokenRemember: "Token merken", tokenMissing: "Bitte zuerst den GitHub-Token eintragen.", tokenHelp: "Wie bekomme ich einen Token?",
@@ -56,7 +56,7 @@
     en: {
       title: "Manage images", intro: "Click an image on the page to swap it. Preview shows instantly. To publish, use “Save to repo” below.",
       pick: "Change image", change: "Choose image", reset: "Reset", resetAll: "Discard all previews",
-      pending: "changed images", none: "No images changed yet.",
+      pending: "changed items", none: "Nothing changed yet.",
       save: "Save to repo", saving: "Saving …", saved: "Saved. The site updates in ~1 minute.",
       tokenLabel: "GitHub access token", tokenHint: "Stays in this browser only. Needed to save to the repo. Fine-grained token with “Contents: Read and write” on this repo.",
       tokenRemember: "Remember token", tokenMissing: "Please enter the GitHub token first.", tokenHelp: "How do I get a token?",
@@ -68,7 +68,7 @@
     ru: {
       title: "Управление изображениями", intro: "Нажми на изображение на странице, чтобы заменить его. Предпросмотр появляется сразу. Для публикации — «Сохранить в репозиторий».",
       pick: "Заменить фото", change: "Выбрать фото", reset: "Сбросить", resetAll: "Отменить все превью",
-      pending: "изменённых изображений", none: "Пока ничего не изменено.",
+      pending: "изменённых элементов", none: "Пока ничего не изменено.",
       save: "Сохранить в репозиторий", saving: "Сохранение …", saved: "Сохранено. Сайт обновится примерно через минуту.",
       tokenLabel: "Токен доступа GitHub", tokenHint: "Остаётся только в этом браузере. Нужен для сохранения в репозиторий. Токен с правом «Contents: Read and write» на этот репозиторий.",
       tokenRemember: "Запомнить токен", tokenMissing: "Сначала введите токен GitHub.", tokenHelp: "Как получить токен?",
@@ -80,7 +80,7 @@
     es: {
       title: "Gestionar imágenes", intro: "Haz clic en una imagen de la página para cambiarla. La vista previa aparece al instante. Para publicar, usa «Guardar en el repo».",
       pick: "Cambiar imagen", change: "Elegir imagen", reset: "Restablecer", resetAll: "Descartar vistas previas",
-      pending: "imágenes cambiadas", none: "Aún no se cambió ninguna imagen.",
+      pending: "elementos cambiados", none: "Aún no se cambió nada.",
       save: "Guardar en el repo", saving: "Guardando …", saved: "Guardado. La página se actualiza en ~1 minuto.",
       tokenLabel: "Token de acceso de GitHub", tokenHint: "Permanece solo en este navegador. Necesario para guardar en el repo. Token con «Contents: Read and write» en este repo.",
       tokenRemember: "Recordar token", tokenMissing: "Introduce primero el token de GitHub.", tokenHelp: "¿Cómo obtengo un token?",
@@ -92,7 +92,7 @@
     pl: {
       title: "Zarządzaj obrazami", intro: "Kliknij obraz na stronie, aby go wymienić. Podgląd pojawia się od razu. Aby opublikować, użyj „Zapisz w repo”.",
       pick: "Zmień obraz", change: "Wybierz obraz", reset: "Resetuj", resetAll: "Odrzuć podglądy",
-      pending: "zmienionych obrazów", none: "Nie zmieniono jeszcze obrazów.",
+      pending: "zmienionych elementów", none: "Nic jeszcze nie zmieniono.",
       save: "Zapisz w repo", saving: "Zapisywanie …", saved: "Zapisano. Strona zaktualizuje się za ~1 minutę.",
       tokenLabel: "Token dostępu GitHub", tokenHint: "Pozostaje tylko w tej przeglądarce. Potrzebny do zapisu w repo. Token z „Contents: Read and write” dla tego repo.",
       tokenRemember: "Zapamiętaj token", tokenMissing: "Najpierw wpisz token GitHub.", tokenHelp: "Jak zdobyć token?",
@@ -208,6 +208,30 @@
         });
       })
       .then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error(j.message || ("HTTP " + r.status)); }); return true; });
+  }
+
+  // Text-Datei (z.B. texte.json) committen — Inhalt ist ein UTF-8-String
+  function utf8ToB64(str) {
+    var bytes = new TextEncoder().encode(str), out = "", chunk = 0x8000;
+    for (var i = 0; i < bytes.length; i += chunk) out += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+    return btoa(out);
+  }
+  function commitText(path, content, token) {
+    var api = "https://api.github.com/repos/" + CFG.owner + "/" + CFG.repo + "/contents/" + path.split("/").map(encodeURIComponent).join("/");
+    return fetch(api + "?ref=" + encodeURIComponent(CFG.branch), { headers: ghHeaders(token) })
+      .then(function (r) { return r.ok ? r.json().then(function (j) { return j.sha; }) : null; })
+      .then(function (sha) {
+        var body = { message: "Texte aktualisiert: " + path, content: utf8ToB64(content), branch: CFG.branch };
+        if (sha) body.sha = sha;
+        return fetch(api, { method: "PUT", headers: ghHeaders(token), body: JSON.stringify(body) });
+      })
+      .then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error(j.message || ("HTTP " + r.status)); }); return true; });
+  }
+
+  // Generische Text-Artefakte (von der App angemeldet, z.B. Texte/Stile -> texte.json)
+  var artifacts = []; // {path, label, get:()=>string, dirty:()=>bool, onSaved?:()=>void}
+  function dirtyArtifacts() {
+    return artifacts.filter(function (a) { try { return a.dirty ? !!a.dirty() : true; } catch (e) { return false; } });
   }
 
   /* --------------------------------------------------------------- CSS */
@@ -448,19 +472,24 @@
 
   function renderPanel() {
     if (!panel) return;
-    var t = T, list = changedList();
+    var t = T, list = changedList(), arts = dirtyArtifacts();
+    var total = list.length + arts.length;
     var repoOk = !!(CFG.owner && CFG.repo);
-    var rows = list.length ? list.map(function (p) {
+    var imgRows = list.map(function (p) {
       var url = objectUrls[p] || "";
       return '<div class="sbbild-row"><img src="' + esc(url) + '" alt=""><span class="p">' + esc(p) + '</span><button data-reset="' + esc(p) + '">✕ ' + esc(t("reset")) + '</button></div>';
-    }).join("") : '<p class="sbbild-hint">' + esc(t("none")) + '</p>';
+    }).join("");
+    var artRows = arts.map(function (a) {
+      return '<div class="sbbild-row"><span style="width:46px;flex:0 0 auto;text-align:center;font-size:22px">📝</span><span class="p">' + esc(a.label || a.path) + '</span></div>';
+    }).join("");
+    var rows = total ? (imgRows + artRows) : '<p class="sbbild-hint">' + esc(t("none")) + '</p>';
 
     panel.innerHTML =
       '<div class="sbbild-hd"><h3>🖼 ' + esc(t("title")) + '</h3><button class="sbbild-x" data-x aria-label="close">✕</button></div>' +
       '<div class="sbbild-bd">' +
       '<p class="sbbild-intro">' + esc(t("intro")) + '</p>' +
       (repoOk ? "" : '<p class="sbbild-hint">⚠ ' + esc(t("noRepo")) + '</p>') +
-      '<div><strong>' + list.length + '</strong> ' + esc(t("pending")) + '</div>' +
+      '<div><strong>' + total + '</strong> ' + esc(t("pending")) + '</div>' +
       '<div class="sbbild-list">' + rows + '</div>' +
       (list.length ? '<button class="sbbild-btn ghost" data-resetall>' + esc(t("resetAll")) + '</button>' : "") +
       (repoOk ? (
@@ -468,7 +497,7 @@
         '<input type="password" data-token placeholder="github_pat_…" autocomplete="off" value="' + esc(getToken()) + '">' +
         '<label class="sbbild-hint" style="font-weight:400"><input type="checkbox" data-remember checked> ' + esc(t("tokenRemember")) + '</label>' +
         '<p class="sbbild-hint">' + esc(t("tokenHint")) + ' <a class="sbbild-a" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">' + esc(t("tokenHelp")) + '</a></p></div>' +
-        '<button class="sbbild-btn" data-save' + (list.length ? "" : " disabled") + '>' + esc(t("save")) + '</button>'
+        '<button class="sbbild-btn" data-save' + (total ? "" : " disabled") + '>' + esc(t("save")) + '</button>'
       ) : "") +
       '<p class="sbbild-log" data-log></p>' +
       '<button class="sbbild-btn ghost" data-x>' + esc(t("close")) + '</button>' +
@@ -483,28 +512,41 @@
   function log(msg) { var l = panel && panel.querySelector("[data-log]"); if (l) l.textContent = msg; }
 
   function doSave() {
-    var list = changedList(); if (!list.length) return;
+    var imgs = changedList(), arts = dirtyArtifacts();
+    var tasks = imgs.map(function (p) { return { t: "img", path: p }; })
+      .concat(arts.map(function (a) { return { t: "text", art: a }; }));
+    if (!tasks.length) return;
     var tokenEl = panel.querySelector("[data-token]"); var token = tokenEl ? tokenEl.value.trim() : "";
     if (!token) { toast(T("tokenMissing")); if (tokenEl) tokenEl.focus(); return; }
     var remember = panel.querySelector("[data-remember]"); var doRemember = !remember || remember.checked;
     try { doRemember ? localStorage.setItem(tokenKey(), token) : localStorage.removeItem(tokenKey()); } catch (e) {}
     var sv = panel.querySelector("[data-save]"); if (sv) { sv.disabled = true; sv.textContent = T("saving"); }
-    var i = 0, ok = 0;
+    var i = 0, ok = 0, n = tasks.length;
+    function done() {
+      log("✓ " + ok + "/" + n + " — " + T("saved"));
+      toast(T("saved"));
+      pending = {}; // Bild-Overrides bleiben als Vorschau bis Pages neu deployt
+      if (sv) { sv.disabled = false; sv.textContent = T("save"); }
+      renderPanel();
+    }
+    function fail(e, label) { log("✗ " + T("err") + ": " + (e && e.message) + "\n" + label); if (sv) { sv.disabled = false; sv.textContent = T("save"); } }
     (function next() {
-      if (i >= list.length) {
-        log("✓ " + ok + "/" + list.length + " — " + T("saved"));
-        toast(T("saved"));
-        // Overrides als Vorschau bis Pages neu deployt; pending leeren
-        pending = {};
-        if (sv) { sv.disabled = false; sv.textContent = T("save"); }
-        renderPanel();
-        return;
+      if (i >= n) return done();
+      var task = tasks[i];
+      if (task.t === "img") {
+        log(T("saving") + " " + (i + 1) + "/" + n + "\n" + task.path);
+        idbGet(task.path).then(function (v) {
+          if (!v || !v.blob) { i++; return next(); }
+          return commitOne(task.path, v.blob, token).then(function () { ok++; i++; next(); });
+        }).catch(function (e) { fail(e, task.path); });
+      } else {
+        var a = task.art, content = "";
+        try { content = a.get() || ""; } catch (e) {}
+        log(T("saving") + " " + (i + 1) + "/" + n + "\n" + (a.label || a.path));
+        commitText(a.path, content, token).then(function () {
+          ok++; try { a.onSaved && a.onSaved(); } catch (e) {} i++; next();
+        }).catch(function (e) { fail(e, a.label || a.path); });
       }
-      var p = list[i]; log(T("saving") + " " + (i + 1) + "/" + list.length + "\n" + p);
-      idbGet(p).then(function (v) {
-        if (!v || !v.blob) { i++; return next(); }
-        return commitOne(p, v.blob, token).then(function () { ok++; i++; next(); });
-      }).catch(function (e) { log("✗ " + T("err") + ": " + (e && e.message) + "\n" + p); if (sv) { sv.disabled = false; sv.textContent = T("save"); } });
     })();
   }
 
@@ -548,8 +590,12 @@
   window.SBBild = {
     open: open, close: closePanel, toggle: function () { panel ? closePanel() : open(); },
     rescan: function () { applyStored(); if (active) positionBadges(); },
+    // App meldet ein Text-Artefakt an (z.B. Texte/Stile -> texte.json), das beim
+    // Speichern mit-committet wird: {path, label, get:()=>string, dirty:()=>bool, onSaved?}
+    registerArtifact: function (a) { if (a && a.path && typeof a.get === "function") { artifacts.push(a); if (panel) renderPanel(); } return this; },
+    refresh: function () { if (panel) renderPanel(); },
     config: CFG,
     // kleine Testfläche (headless-Smoke) — harmlos in Produktion
-    _t: { pathOf: pathOf, b64: blobToBase64, apiUrl: apiUrl, formatFor: formatFor }
+    _t: { pathOf: pathOf, b64: blobToBase64, apiUrl: apiUrl, formatFor: formatFor, utf8ToB64: utf8ToB64 }
   };
 })();
