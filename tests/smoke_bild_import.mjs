@@ -91,6 +91,12 @@ const big = new Uint8Array(70000); for (let i = 0; i < big.length; i++) big[i] =
 const b64big = await t.b64({ arrayBuffer: async () => big.buffer });
 ok("base64 gross (chunking) == node buffer", b64big === Buffer.from(big).toString("base64"));
 
+// 4b) Ziel-Format nach Endung (fürs Einbrennen des Ausschnitts)
+console.log("Format-Wahl:");
+ok("jpg -> image/jpeg", t.formatFor("assets/img/hero.jpg").mime === "image/jpeg");
+ok("webp -> image/webp", t.formatFor("assets/certificate-3.webp").mime === "image/webp");
+ok("png -> image/png (verlustfrei)", t.formatFor("assets/logo.png").mime === "image/png" && t.formatFor("assets/logo.png").q === undefined);
+
 // 5) PSB-Konfig separat
 console.log("PSB-Konfig:");
 let SB2 = load(makeEnv("lausiklauskn-png.github.io", "/Perfect-Skin-Beauty/"));
