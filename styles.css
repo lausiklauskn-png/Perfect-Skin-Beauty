@@ -56,7 +56,6 @@
   --blob-1: rgba(174, 156, 150, .16);
   --blob-2: rgba(215, 188, 170, .14);
   --blob-3: rgba(174, 156, 150, .10);
-  --branch: rgba(122, 100, 90, .16);
 
   /* Glanz auf Buttons */
   --sheen: rgba(255, 255, 255, .35);
@@ -97,7 +96,6 @@
   --blob-1: rgba(201, 169, 141, .10);
   --blob-2: rgba(169, 141, 116, .09);
   --blob-3: rgba(201, 169, 141, .06);
-  --branch: rgba(201, 169, 141, .12);
 
   --sheen: rgba(255, 244, 230, .22);
 
@@ -138,7 +136,7 @@ a { color: inherit; }
 .skip-link:focus { left: 12px; top: 12px; }
 
 /* ===================================================================
-   Hintergrund-Deko: weiche Farbflächen + feine Zweig-Linien.
+   Hintergrund-Deko: weiche Farbflächen (Blobs).
    Bewusst dezent — fixe Ebene hinter allem, langsame Drift.
    =================================================================== */
 .deco {
@@ -180,16 +178,7 @@ a { color: inherit; }
   from { transform: translate(0, 0) scale(1.06); }
   to   { transform: translate(-4vw, -3vh) scale(1); }
 }
-.deco__branch {
-  position: absolute;
-  width: clamp(120px, 14vw, 220px);
-  height: auto;
-  color: var(--branch);
-}
-.deco__branch--left  { left: -20px; bottom: 8vh; }
-.deco__branch--right { right: -20px; top: 16vh; }
 @media (max-width: 760px) {
-  .deco__branch { display: none; }
   .deco__blob { filter: blur(50px); }
 }
 
