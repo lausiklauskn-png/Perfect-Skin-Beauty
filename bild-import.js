@@ -50,7 +50,8 @@
       tokenRemember: "Token merken", tokenMissing: "Bitte zuerst den GitHub-Token eintragen.", tokenHelp: "Wie bekomme ich einen Token?",
       done: "Fertig", err: "Fehler", close: "Schließen", modeOn: "Bild-Modus an — Bild anklicken", processing: "verarbeite Bild …",
       noRepo: "Repo nicht erkannt — Speichern ins Repo hier nicht möglich (lokale Vorschau geht). Auf der GitHub-Pages-Adresse öffnen.",
-      big: "Bild sehr groß, wird verkleinert.", loadErr: "Bild konnte nicht gelesen werden."
+      big: "Bild sehr groß, wird verkleinert.", loadErr: "Bild konnte nicht gelesen werden.",
+      crop_title: "Bild ausrichten", crop_hint: "Ziehen zum Verschieben · Regler zum Zoomen. Der sichtbare Ausschnitt wird gespeichert (passt auf allen Bildschirmbreiten).", crop_apply: "Übernehmen", crop_cancel: "Abbrechen", crop_zoom: "Zoom", crop_reframe: "Ausschnitt ändern"
     },
     en: {
       title: "Manage images", intro: "Click an image on the page to swap it. Preview shows instantly. To publish, use “Save to repo” below.",
@@ -61,7 +62,8 @@
       tokenRemember: "Remember token", tokenMissing: "Please enter the GitHub token first.", tokenHelp: "How do I get a token?",
       done: "Done", err: "Error", close: "Close", modeOn: "Image mode on — click an image", processing: "processing image …",
       noRepo: "Repo not detected — saving to repo unavailable here (local preview works). Open on the GitHub Pages address.",
-      big: "Image very large, will be shrunk.", loadErr: "Could not read image."
+      big: "Image very large, will be shrunk.", loadErr: "Could not read image.",
+      crop_title: "Position image", crop_hint: "Drag to move · slider to zoom. The visible crop is saved (fits all screen widths).", crop_apply: "Apply", crop_cancel: "Cancel", crop_zoom: "Zoom", crop_reframe: "Reframe"
     },
     ru: {
       title: "Управление изображениями", intro: "Нажми на изображение на странице, чтобы заменить его. Предпросмотр появляется сразу. Для публикации — «Сохранить в репозиторий».",
@@ -72,7 +74,8 @@
       tokenRemember: "Запомнить токен", tokenMissing: "Сначала введите токен GitHub.", tokenHelp: "Как получить токен?",
       done: "Готово", err: "Ошибка", close: "Закрыть", modeOn: "Режим изображений — нажми на фото", processing: "обработка …",
       noRepo: "Репозиторий не определён — сохранение недоступно (превью работает). Откройте по адресу GitHub Pages.",
-      big: "Очень большое изображение, будет уменьшено.", loadErr: "Не удалось прочитать изображение."
+      big: "Очень большое изображение, будет уменьшено.", loadErr: "Не удалось прочитать изображение.",
+      crop_title: "Кадрировать фото", crop_hint: "Тяните, чтобы двигать · ползунок для зума. Сохраняется видимая область (подходит для всех экранов).", crop_apply: "Применить", crop_cancel: "Отмена", crop_zoom: "Зум", crop_reframe: "Изменить кадр"
     },
     es: {
       title: "Gestionar imágenes", intro: "Haz clic en una imagen de la página para cambiarla. La vista previa aparece al instante. Para publicar, usa «Guardar en el repo».",
@@ -83,7 +86,8 @@
       tokenRemember: "Recordar token", tokenMissing: "Introduce primero el token de GitHub.", tokenHelp: "¿Cómo obtengo un token?",
       done: "Listo", err: "Error", close: "Cerrar", modeOn: "Modo imagen — haz clic en una foto", processing: "procesando …",
       noRepo: "Repo no detectado — guardar no disponible (la vista previa funciona). Abre en la dirección de GitHub Pages.",
-      big: "Imagen muy grande, se reducirá.", loadErr: "No se pudo leer la imagen."
+      big: "Imagen muy grande, se reducirá.", loadErr: "No se pudo leer la imagen.",
+      crop_title: "Encuadrar imagen", crop_hint: "Arrastra para mover · control para zoom. Se guarda el recorte visible (encaja en todos los anchos).", crop_apply: "Aplicar", crop_cancel: "Cancelar", crop_zoom: "Zoom", crop_reframe: "Reencuadrar"
     },
     pl: {
       title: "Zarządzaj obrazami", intro: "Kliknij obraz na stronie, aby go wymienić. Podgląd pojawia się od razu. Aby opublikować, użyj „Zapisz w repo”.",
@@ -94,7 +98,8 @@
       tokenRemember: "Zapamiętaj token", tokenMissing: "Najpierw wpisz token GitHub.", tokenHelp: "Jak zdobyć token?",
       done: "Gotowe", err: "Błąd", close: "Zamknij", modeOn: "Tryb obrazów — kliknij zdjęcie", processing: "przetwarzanie …",
       noRepo: "Nie wykryto repo — zapis niedostępny (podgląd działa). Otwórz na adresie GitHub Pages.",
-      big: "Bardzo duży obraz, zostanie zmniejszony.", loadErr: "Nie udało się odczytać obrazu."
+      big: "Bardzo duży obraz, zostanie zmniejszony.", loadErr: "Nie udało się odczytać obrazu.",
+      crop_title: "Kadruj zdjęcie", crop_hint: "Przeciągnij, aby przesunąć · suwak do zbliżenia. Zapisywany jest widoczny kadr (pasuje na każdej szerokości).", crop_apply: "Zastosuj", crop_cancel: "Anuluj", crop_zoom: "Zoom", crop_reframe: "Zmień kadr"
     }
   };
   function lang() {
@@ -153,11 +158,17 @@
     else { el.style.backgroundImage = 'url("' + url + '")'; }
   }
 
-  // Bild verkleinern/rekodieren passend zur Ziel-Endung
-  function compress(file, path) {
+  // Ziel-Format nach Datei-Endung (webp bleibt webp, png bleibt png, sonst jpeg)
+  function formatFor(path) {
     var ext = (path.split(".").pop() || "jpg").toLowerCase();
     var mime = ext === "png" ? "image/png" : ext === "webp" ? "image/webp" : "image/jpeg";
-    var MAX = 1600, Q = mime === "image/png" ? undefined : 0.85;
+    return { mime: mime, q: mime === "image/png" ? undefined : 0.85 };
+  }
+
+  // Bild verkleinern/rekodieren passend zur Ziel-Endung
+  function compress(file, path) {
+    var f = formatFor(path), mime = f.mime, Q = f.q;
+    var MAX = 1600;
     return new Promise(function (res, rej) {
       var img = new Image();
       img.onload = function () {
@@ -228,7 +239,19 @@
       ".sbbild-hint{font-size:12px;opacity:.72;margin:0}",
       ".sbbild-log{font-size:12px;white-space:pre-wrap;opacity:.85;margin:0}",
       ".sbbild-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:2147483647;background:#1a1a1a;color:#fff;padding:10px 16px;border-radius:999px;font:600 13px system-ui,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.35)}",
-      ".sbbild-a{color:#7a5cff}"
+      ".sbbild-a{color:#7a5cff}",
+      ".sbbild-crop-ov{position:fixed;inset:0;z-index:2147483640;background:rgba(0,0,0,.62);display:flex;align-items:center;justify-content:center;padding:16px}",
+      ".sbbild-crop-box{background:#fff;color:#1a1a1a;border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.4);max-width:96vw;padding:14px;font:14px/1.5 system-ui,sans-serif}",
+      "@media(prefers-color-scheme:dark){.sbbild-crop-box{background:#1c1c1e;color:#f2f2f2}}",
+      ".sbbild-crop-hd{font-weight:700;margin-bottom:10px}",
+      ".sbbild-crop-stage{display:flex;justify-content:center;background:rgba(128,128,128,.12);border-radius:10px;overflow:hidden}",
+      ".sbbild-crop-cv{display:block;touch-action:none;cursor:grab;max-width:100%;height:auto}",
+      ".sbbild-crop-cv:active{cursor:grabbing}",
+      ".sbbild-crop-hint{font-size:12px;opacity:.72;margin:8px 0 4px}",
+      ".sbbild-crop-zoom{display:flex;align-items:center;gap:8px;font-size:13px;margin:6px 0 12px}",
+      ".sbbild-crop-zoom input{flex:1}",
+      ".sbbild-crop-btns{display:flex;gap:10px}",
+      ".sbbild-crop-btns .sbbild-btn{flex:1}"
     ].join("\n");
     (document.head || document.documentElement).appendChild(s);
   }
@@ -284,16 +307,101 @@
 
   function slotByPath(path) { for (var i = 0; i < slots.length; i++) if (slots[i].path === path) return slots[i]; return null; }
 
-  function handleFile(path, file) {
-    toast(T("processing"));
-    compress(file, path).then(function (blob) {
-      return idbPut(path, { blob: blob, ts: Date.now() }).then(function () {
-        var s = slotByPath(path); if (s) applyToEl(s.el, blob);
-        pending[path] = true;
-        if (panel) renderPanel();
-        if (active) positionBadges();
-      });
+  function storeOverride(path, blob) {
+    return idbPut(path, { blob: blob, ts: Date.now() }).then(function () {
+      var s = slotByPath(path); if (s) applyToEl(s.el, blob);
+      pending[path] = true;
+      if (panel) renderPanel();
+      if (active) positionBadges();
     }).catch(function () { toast(T("loadErr")); });
+  }
+  // Fallback ohne Ausricht-Fenster (nur verkleinern)
+  function handleFileDirect(path, file) {
+    toast(T("processing"));
+    compress(file, path).then(function (blob) { return storeOverride(path, blob); }).catch(function () { toast(T("loadErr")); });
+  }
+  // Bild wählen -> Ausricht-Fenster (ziehen/zoomen) -> Ausschnitt einbrennen -> speichern
+  function handleFile(path, file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var img = new Image();
+      img.onload = function () { openCropper(path, img); };
+      img.onerror = function () { handleFileDirect(path, file); };
+      img.src = reader.result;
+    };
+    reader.onerror = function () { handleFileDirect(path, file); };
+    try { reader.readAsDataURL(file); } catch (e) { handleFileDirect(path, file); }
+  }
+
+  function openCropper(path, img) {
+    injectCss();
+    var s = slotByPath(path);
+    var iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+    if (!iw || !ih) { toast(T("loadErr")); return; }
+    var Ri = iw / ih, Rf;
+    if (s) { var r = s.el.getBoundingClientRect(); Rf = (r.width > 4 && r.height > 4) ? (r.width / r.height) : Ri; }
+    else Rf = Ri;
+    var z = 1, px = 0.5, py = 0.5;
+
+    var ov = document.createElement("div"); ov.className = "sbbild-crop-ov";
+    var box = document.createElement("div"); box.className = "sbbild-crop-box";
+    var maxW = Math.min(window.innerWidth * 0.9, 620), maxH = window.innerHeight * 0.6;
+    var pw = Math.min(maxW, maxH * Rf); if (pw < 120) pw = 120; var ph = Math.round(pw / Rf); pw = Math.round(pw);
+    box.innerHTML =
+      '<div class="sbbild-crop-hd">' + esc(T("crop_title")) + '</div>' +
+      '<div class="sbbild-crop-stage"><canvas class="sbbild-crop-cv" width="' + pw + '" height="' + ph + '"></canvas></div>' +
+      '<p class="sbbild-crop-hint">' + esc(T("crop_hint")) + '</p>' +
+      '<label class="sbbild-crop-zoom">' + esc(T("crop_zoom")) + ' <input type="range" min="1" max="3" step="0.01" value="1"></label>' +
+      '<div class="sbbild-crop-btns"><button class="sbbild-btn ghost" data-cancel>' + esc(T("crop_cancel")) + '</button><button class="sbbild-btn" data-apply>' + esc(T("crop_apply")) + '</button></div>';
+    ov.appendChild(box); document.body.appendChild(ov);
+
+    var cv = box.querySelector("canvas"), ctx = cv.getContext("2d");
+    var range = box.querySelector("input[type=range]");
+
+    function cropRect() {
+      var baseSW, baseSH;
+      if (Ri >= Rf) { baseSH = ih; baseSW = ih * Rf; } else { baseSW = iw; baseSH = iw / Rf; }
+      var sw = baseSW / z, sh = baseSH / z;
+      var sx = (iw - sw) * px, sy = (ih - sh) * py;
+      return { sx: sx, sy: sy, sw: sw, sh: sh };
+    }
+    function draw() {
+      var c = cropRect();
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.drawImage(img, c.sx, c.sy, c.sw, c.sh, 0, 0, cv.width, cv.height);
+    }
+    draw();
+
+    var dragging = false, lastX = 0, lastY = 0;
+    cv.addEventListener("pointerdown", function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; try { cv.setPointerCapture(e.pointerId); } catch (er) {} });
+    cv.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var c = cropRect();
+      var dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
+      if (iw - c.sw > 0) px = Math.min(1, Math.max(0, px - (dx * (c.sw / cv.width)) / (iw - c.sw)));
+      if (ih - c.sh > 0) py = Math.min(1, Math.max(0, py - (dy * (c.sh / cv.height)) / (ih - c.sh)));
+      draw();
+    });
+    cv.addEventListener("pointerup", function () { dragging = false; });
+    cv.addEventListener("pointercancel", function () { dragging = false; });
+    range.addEventListener("input", function () { z = parseFloat(range.value) || 1; draw(); });
+
+    function close() { ov.remove(); }
+    box.querySelector("[data-cancel]").addEventListener("click", close);
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    box.querySelector("[data-apply]").addEventListener("click", function () {
+      var c = cropRect();
+      var outW = Math.min(1600, Math.max(640, Math.round(c.sw)));
+      var outH = Math.round(outW / Rf);
+      if (outH > 1600) { outH = 1600; outW = Math.round(outH * Rf); }
+      var oc = document.createElement("canvas"); oc.width = outW; oc.height = outH;
+      oc.getContext("2d").drawImage(img, c.sx, c.sy, c.sw, c.sh, 0, 0, outW, outH);
+      var fmt = formatFor(path);
+      oc.toBlob(function (blob) {
+        if (!blob) { toast(T("loadErr")); return; }
+        close(); toast(T("processing")); storeOverride(path, blob);
+      }, fmt.mime, fmt.q);
+    });
   }
 
   // Beim Laden: gespeicherte Overrides anwenden (Vorschau überlebt Neuladen)
@@ -442,6 +550,6 @@
     rescan: function () { applyStored(); if (active) positionBadges(); },
     config: CFG,
     // kleine Testfläche (headless-Smoke) — harmlos in Produktion
-    _t: { pathOf: pathOf, b64: blobToBase64, apiUrl: apiUrl }
+    _t: { pathOf: pathOf, b64: blobToBase64, apiUrl: apiUrl, formatFor: formatFor }
   };
 })();
